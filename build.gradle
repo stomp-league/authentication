@@ -1,13 +1,13 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.0.2'
-    id 'io.spring.dependency-management' version '1.1.0'
-    id 'maven-publish'
+  id 'java'
+  id 'org.springframework.boot' version '3.0.2'
+  id 'io.spring.dependency-management' version '1.1.0'
+  id 'maven-publish'
 }
 
 repositories {
-    mavenCentral()
-    google()
+  mavenCentral()
+  google()
 }
 
 group = project.property('artifact.group')
@@ -16,15 +16,22 @@ version = project.property('artifact.version')
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-springBoot {
-    mainClass = project.property('main.class')
-}
-
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+  implementation 'org.springframework.boot:spring-boot-starter'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.liquibase:liquibase-core'
+
+  runtimeOnly 'com.mysql:mysql-connector-j'
+  runtimeOnly 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.11.0'
+
+  testImplementation platform('org.junit:junit-bom:5.9.1')
+  testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
-    useJUnitPlatform()
+  useJUnitPlatform()
+}
+
+springBoot {
+  mainClass = project.property('main.class')
 }
