@@ -6,7 +6,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
   <changeSet id="20230722222330" author="alex-redfearn">
-    <preConditions>
+    <preConditions onFail="MARK_RAN">
       <not>
         <tableExists tableName="USER"/>
       </not>
@@ -18,20 +18,23 @@
       <column name="EMAIL" type="VARCHAR(255)">
         <constraints nullable="false"/>
       </column>
-      <column name="EMAIL_VERIFIED" type="BOOLEAN" defaultValueBoolean="false">
+      <column name="VERIFIED" type="BOOLEAN" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
         <constraints nullable="false"/>
       </column>
     </createTable>
   </changeSet>
 
   <changeSet id="20230726174510" author="alex-redfearn">
-    <preConditions>
+    <preConditions onFail="MARK_RAN">
       <not>
         <tableExists tableName="USER_DETAILS"/>
       </not>
     </preConditions>
     <createTable tableName="USER_DETAILS">
-      <column name="ID" type="BIGINT">
+      <column name="ID" type="BIGINT" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"/>
       </column>
       <column name="USER_ID" type="BIGINT">
@@ -46,17 +49,20 @@
       <column name="COUNTRY" type="VARCHAR(2)">
         <constraints nullable="false"/>
       </column>
+      <column name="CREATED_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+        <constraints nullable="false"/>
+      </column>
     </createTable>
   </changeSet>
 
   <changeSet id="20230726174520" author="alex-redfearn">
-    <preConditions>
+    <preConditions onFail="MARK_RAN">
       <not>
         <tableExists tableName="USER_CREDENTIAL"/>
       </not>
     </preConditions>
     <createTable tableName="USER_CREDENTIAL">
-      <column name="ID" type="BIGINT">
+      <column name="ID" type="BIGINT" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"/>
       </column>
       <column name="USER_ID" type="BIGINT">
@@ -66,6 +72,9 @@
         <constraints nullable="false"/>
       </column>
       <column name="SALT" type="VARCHAR(8)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
         <constraints nullable="false"/>
       </column>
     </createTable>
