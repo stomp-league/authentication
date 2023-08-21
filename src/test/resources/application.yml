@@ -1,9 +1,5 @@
-server:
-  servlet:
-    context-path: /
-  port: 8080
-
 spring:
+
   data:
     redis:
       host: localhost
@@ -11,7 +7,9 @@ spring:
 
   docker:
     compose:
-      lifecycle-management: start-and-stop
+        lifecycle-management: start-and-stop
+        skip:
+          in-tests: false
 
   jpa:
     hibernate:
@@ -31,20 +29,7 @@ spring:
     change-log: classpath:releases/migrations.xml
     contexts: local
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/stomp_league
-    username: root
-    password: WindyKayak@3
-
-  mvc:
-    pathmatch:
-      # To prevent "Failed to start bean 'documentationPluginsBootstrapper'" exception
-      matching-strategy: ANT_PATH_MATCHER
-
-springdoc:
-  swagger-ui:
-    enabled: true
-
 logging:
   level:
     liquibase: DEBUG
+    org.springframework.data.redis: DEBUG

@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0.33
+    environment:
+      MYSQL_DATABASE: 'db'
+      # Define a user instead of using root
+      MYSQL_USER: 'user'
+      # Password for user access
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql:/var/lib/mysql
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+volumes:
+  mysql:
+  redis:
