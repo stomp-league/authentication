@@ -1,8 +1,7 @@
 package com.stompleague.stompengine.service;
 
-import com.stompleague.stompengine.repository.OneTimePasswordRepository;
+import com.stompleague.stompengine.repository.UserVerificationCodeRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +9,15 @@ import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
-public class OneTimePasswordService {
+public class UserVerificationCodeService {
 
-  private final OneTimePasswordRepository oneTimePasswordRepository;
+  private final UserVerificationCodeRepository userVerificationCodeRepository;
+
+  @Autowired
+  public UserVerificationCodeService(UserVerificationCodeRepository userVerificationCodeRepository) {
+    this.userVerificationCodeRepository = userVerificationCodeRepository;
+  }
 
   public void generate(String email) {
     log.debug("generate(String), {}", email);
@@ -24,11 +27,11 @@ public class OneTimePasswordService {
 
     String code = String.valueOf(randomNumber);
 
-    this.oneTimePasswordRepository.set(email, code);
+    this.userVerificationCodeRepository.set(email, code);
   }
 
   public boolean verify(String email, String code) {
-    return this.oneTimePasswordRepository.exists(email, code);
+    return this.userVerificationCodeRepository.exists(email, code);
   }
 
 }

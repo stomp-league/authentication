@@ -1,5 +1,6 @@
 package com.stompleague.stompengine.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
@@ -7,12 +8,13 @@ import org.springframework.stereotype.Repository;
 import java.util.concurrent.TimeUnit;
 
 @Repository
-public class OneTimePasswordRepository {
+public class UserVerificationCodeRepository {
 
   private final StringRedisTemplate stringRedisTemplate;
   private final ValueOperations<String, String> valueOperations;
 
-  public OneTimePasswordRepository(StringRedisTemplate stringRedisTemplate) {
+  @Autowired
+  public UserVerificationCodeRepository(StringRedisTemplate stringRedisTemplate) {
     this.stringRedisTemplate = stringRedisTemplate;
     this.valueOperations = this.stringRedisTemplate.opsForValue();
   }
