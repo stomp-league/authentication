@@ -4,14 +4,26 @@ server:
   port: 8080
 
 spring:
+
+  mvc:
+    pathmatch:
+      # To prevent "Failed to start bean 'documentationPluginsBootstrapper'" exception
+      matching-strategy: ANT_PATH_MATCHER
+
+  docker:
+    compose:
+      # This will build, start, and stop docker containers from the compose file
+      lifecycle-management: start-and-stop
+
   data:
     redis:
       host: localhost
       port: 6379
 
-  docker:
-    compose:
-      lifecycle-management: start-and-stop
+  datasource:
+    url: jdbc:mysql://localhost:3306/stomp_league
+    username: user
+    password: password
 
   jpa:
     hibernate:
@@ -30,16 +42,6 @@ spring:
   liquibase:
     change-log: classpath:releases/migrations.xml
     contexts: local
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/stomp_league
-    username: root
-    password: WindyKayak@3
-
-  mvc:
-    pathmatch:
-      # To prevent "Failed to start bean 'documentationPluginsBootstrapper'" exception
-      matching-strategy: ANT_PATH_MATCHER
 
 springdoc:
   swagger-ui:

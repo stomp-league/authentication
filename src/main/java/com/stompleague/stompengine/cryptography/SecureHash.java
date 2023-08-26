@@ -8,11 +8,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class SecureHash {
 
-  public static String hash(String value, String secret) {
+  public static String hash(String value, String salt) {
     try {
       Mac algorithm = Mac.getInstance("HmacSHA256");
 
-      algorithm.init(new SecretKeySpec(secret.getBytes(), "HmacSHA256"));
+      algorithm.init(new SecretKeySpec(salt.getBytes(), "HmacSHA256"));
       byte[] hash = algorithm.doFinal(value.getBytes());
 
       return DatatypeConverter.printHexBinary(hash).toLowerCase();

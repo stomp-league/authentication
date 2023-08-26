@@ -15,7 +15,6 @@ public class Main {
       |   __|_   _|     |     |  _  |
       |__   | | | |  |  | | | |   __|
       |_____| |_| |_____|_|_|_|__|
-      \n
       """);
 
     SpringApplication.run(Main.class, args);

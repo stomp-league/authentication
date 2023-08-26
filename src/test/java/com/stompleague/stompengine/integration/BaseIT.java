@@ -1,4 +1,4 @@
-package com.stompleague.stompengine;
+package com.stompleague.stompengine.integration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
