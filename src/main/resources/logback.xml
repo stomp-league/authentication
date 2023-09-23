@@ -12,6 +12,6 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="com.stompleague.stompengine" level="debug"/>
+    <logger name="com.stompleague.authentication" level="debug"/>
 
 </configuration>
