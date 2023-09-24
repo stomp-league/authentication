@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "USER_CREDENTIAL")
-public class UserCredential {
+@Table(name = "IDENTITY_CREDENTIAL")
+public class IdentityCredential {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @OneToOne
-  @JoinColumn(name = "USER_ID")
-  private User user;
+  @JoinColumn(name = "IDENTITY_ID")
+  private Identity identity;
 
   @Column(name = "HASH")
   private String hash;

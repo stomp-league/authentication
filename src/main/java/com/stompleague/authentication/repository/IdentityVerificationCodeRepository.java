@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 import java.util.concurrent.TimeUnit;
 
 @Repository
-public class UserVerificationCodeRepository {
+public class IdentityVerificationCodeRepository {
 
   private final StringRedisTemplate stringRedisTemplate;
   private final ValueOperations<String, String> valueOperations;
 
   @Autowired
-  public UserVerificationCodeRepository(StringRedisTemplate stringRedisTemplate) {
+  public IdentityVerificationCodeRepository(StringRedisTemplate stringRedisTemplate) {
     this.stringRedisTemplate = stringRedisTemplate;
     this.valueOperations = this.stringRedisTemplate.opsForValue();
   }

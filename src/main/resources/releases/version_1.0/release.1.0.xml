@@ -8,10 +8,10 @@
   <changeSet id="20230722222330" author="alex-redfearn">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="USER"/>
+        <tableExists tableName="IDENTITY"/>
       </not>
     </preConditions>
-    <createTable tableName="USER">
+    <createTable tableName="IDENTITY">
       <column name="ID" type="BIGINT" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"/>
       </column>
@@ -27,45 +27,17 @@
     </createTable>
   </changeSet>
 
-  <changeSet id="20230726174510" author="alex-redfearn">
-    <preConditions onFail="MARK_RAN">
-      <not>
-        <tableExists tableName="USER_DETAILS"/>
-      </not>
-    </preConditions>
-    <createTable tableName="USER_DETAILS">
-      <column name="ID" type="BIGINT" autoIncrement="true">
-        <constraints primaryKey="true" nullable="false"/>
-      </column>
-      <column name="USER_ID" type="BIGINT">
-        <constraints nullable="false"/>
-      </column>
-      <column name="FIRST_NAME" type="VARCHAR(64)">
-        <constraints nullable="false"/>
-      </column>
-      <column name="LAST_NAME" type="VARCHAR(64)">
-        <constraints nullable="false"/>
-      </column>
-      <column name="COUNTRY" type="VARCHAR(2)">
-        <constraints nullable="false"/>
-      </column>
-      <column name="CREATED_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
-        <constraints nullable="false"/>
-      </column>
-    </createTable>
-  </changeSet>
-
   <changeSet id="20230726174520" author="alex-redfearn">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="USER_CREDENTIAL"/>
+        <tableExists tableName="IDENTITY_CREDENTIAL"/>
       </not>
     </preConditions>
-    <createTable tableName="USER_CREDENTIAL">
+    <createTable tableName="IDENTITY_CREDENTIAL">
       <column name="ID" type="BIGINT" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"/>
       </column>
-      <column name="USER_ID" type="BIGINT">
+      <column name="IDENTITY_ID" type="BIGINT">
         <constraints nullable="false"/>
       </column>
       <column name="HASH" type="VARCHAR(64)">
@@ -79,10 +51,10 @@
       </column>
     </createTable>
 
-    <addForeignKeyConstraint baseTableName="USER_CREDENTIAL"
-      baseColumnNames="USER_ID"
-      constraintName="user_credential_user_id_fk"
-      referencedTableName="USER"
+    <addForeignKeyConstraint baseTableName="IDENTITY_CREDENTIAL"
+      baseColumnNames="IDENTITY_ID"
+      constraintName="identity_credential_identity_id_fk"
+      referencedTableName="IDENTITY"
       referencedColumnNames="ID"/>
 
   </changeSet>

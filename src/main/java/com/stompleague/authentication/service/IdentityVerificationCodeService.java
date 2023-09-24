@@ -1,6 +1,6 @@
 package com.stompleague.authentication.service;
 
-import com.stompleague.authentication.repository.UserVerificationCodeRepository;
+import com.stompleague.authentication.repository.IdentityVerificationCodeRepository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,13 @@ import java.security.SecureRandom;
 
 @Slf4j
 @Service
-public class UserVerificationCodeService {
+public class IdentityVerificationCodeService {
 
-  private final UserVerificationCodeRepository userVerificationCodeRepository;
+  private final IdentityVerificationCodeRepository identityVerificationCodeRepository;
 
   @Autowired
-  public UserVerificationCodeService(UserVerificationCodeRepository userVerificationCodeRepository) {
-    this.userVerificationCodeRepository = userVerificationCodeRepository;
+  public IdentityVerificationCodeService(IdentityVerificationCodeRepository identityVerificationCodeRepository) {
+    this.identityVerificationCodeRepository = identityVerificationCodeRepository;
   }
 
   public void generate(String email) {
@@ -27,11 +27,11 @@ public class UserVerificationCodeService {
 
     String code = String.valueOf(randomNumber);
 
-    this.userVerificationCodeRepository.set(email, code);
+    this.identityVerificationCodeRepository.set(email, code);
   }
 
   public boolean verify(String email, String code) {
-    return this.userVerificationCodeRepository.exists(email, code);
+    return this.identityVerificationCodeRepository.exists(email, code);
   }
 
 }
