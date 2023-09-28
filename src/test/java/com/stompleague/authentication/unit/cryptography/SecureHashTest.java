@@ -1,6 +1,6 @@
 package com.stompleague.authentication.unit.cryptography;
 
-import static com.stompleague.authentication.unit.user.UserServiceTest.PASSWORD;
+import static com.stompleague.authentication.unit.identity.IdentityServiceTest.PASSWORD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stompleague.authentication.cryptography.SecureHash;

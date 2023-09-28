@@ -1,9 +1,9 @@
 package com.stompleague.authentication.service;
 
 import com.stompleague.authentication.cryptography.SecureHash;
-import com.stompleague.authentication.model.entity.User;
-import com.stompleague.authentication.model.entity.UserCredential;
-import com.stompleague.authentication.repository.UserCredentialRepository;
+import com.stompleague.authentication.model.entity.Identity;
+import com.stompleague.authentication.model.entity.IdentityCredential;
+import com.stompleague.authentication.repository.IdentityCredentialRepository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,17 +16,17 @@ import java.time.ZoneOffset;
 
 @Slf4j
 @Service
-public class UserCredentialService {
+public class IdentityCredentialService {
 
-  private final UserCredentialRepository userCredentialRepository;
+  private final IdentityCredentialRepository identityCredentialRepository;
 
   @Autowired
-  public UserCredentialService(UserCredentialRepository userCredentialRepository) {
-    this.userCredentialRepository = userCredentialRepository;
+  public IdentityCredentialService(IdentityCredentialRepository identityCredentialRepository) {
+    this.identityCredentialRepository = identityCredentialRepository;
   }
 
-  public void save(User user, String password) {
-    log.debug("save(User, String), {}, {}", user, password);
+  public void save(Identity identity, String password) {
+    log.debug("save(Identity, String), {}, {}", identity, password);
 
     if (StringUtils.isEmpty(password))
       throw new IllegalArgumentException("Password empty");
@@ -34,9 +34,9 @@ public class UserCredentialService {
     String salt = RandomStringUtils.randomAlphanumeric(8);
     String hash = SecureHash.hash(password, salt);
 
-    this.userCredentialRepository.save(
-      new UserCredential()
-        .setUser(user)
+    this.identityCredentialRepository.save(
+      new IdentityCredential()
+        .setIdentity(identity)
         .setHash(hash)
         .setSalt(salt)
         .setCreatedDate(LocalDateTime.now(ZoneOffset.UTC))

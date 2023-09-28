@@ -1,4 +1,4 @@
-package com.stompleague.authentication.integration.user;
+package com.stompleague.authentication.integration.identity;
 
 import com.stompleague.authentication.integration.BaseIT;
 import com.stompleague.authentication.model.dto.RegistrationRequest;
@@ -10,12 +10,12 @@ import org.springframework.http.MediaType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class UserIT extends BaseIT {
+public class IdentityIT extends BaseIT {
 
-  public static final String USER_ENDPOINT = "/user";
+  public static final String IDENTITY_ENDPOINT = "/identity";
 
   @Test
-  public void givenNewUser_whenCreateRequest_thenReturnCreated() {
+  public void givenNewIdentity_whenCreateRequest_thenReturnCreated() {
     // GIVEN
     RegistrationRequest request = new RegistrationRequest()
       .setEmail("roger.badger@stompleague.com")
@@ -23,7 +23,7 @@ public class UserIT extends BaseIT {
 
     // WHEN
     webClient.post()
-      .uri(USER_ENDPOINT)
+      .uri(IDENTITY_ENDPOINT)
       .contentType(MediaType.APPLICATION_JSON)
       .bodyValue(request)
       .exchange()
@@ -33,14 +33,14 @@ public class UserIT extends BaseIT {
   }
 
   @Test
-  public void givenNewUser_whenCreateRequestWithMissingPassword_thenReturnBadRequest() {
+  public void givenNewIdentity_whenCreateRequestWithMissingPassword_thenReturnBadRequest() {
     // GIVEN
     RegistrationRequest request = new RegistrationRequest()
       .setEmail("roger.badger@stompleague.com");
 
     // WHEN
     webClient.post()
-      .uri(USER_ENDPOINT)
+      .uri(IDENTITY_ENDPOINT)
       .contentType(MediaType.APPLICATION_JSON)
       .bodyValue(request)
       .exchange()
@@ -50,14 +50,14 @@ public class UserIT extends BaseIT {
   }
 
   @Test
-  public void givenNewUser_whenCreateRequestWithMissingEmail_thenReturnBadRequest() {
+  public void givenNewIdentity_whenCreateRequestWithMissingEmail_thenReturnBadRequest() {
     // GIVEN
     RegistrationRequest request = new RegistrationRequest()
       .setPassword("Pa55w0rd!");
 
     // WHEN
     webClient.post()
-      .uri(USER_ENDPOINT)
+      .uri(IDENTITY_ENDPOINT)
       .contentType(MediaType.APPLICATION_JSON)
       .bodyValue(request)
       .exchange()
